@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#define WEBDAV_URL_OVERHEAD 8
+
 static int build_progress_payload(const book_progress_t *progress, uint8_t *payload, size_t payload_size) {
     if (progress == NULL || payload == NULL || payload_size == 0) return -1;
     int n = snprintf(
@@ -31,7 +33,7 @@ void webdav_client_init(webdav_client_t *client, const webdav_config_t *cfg, web
 bool webdav_upload_progress(webdav_client_t *client, const book_progress_t *progress) {
     if (client == NULL || progress == NULL || client->transport == NULL) return false;
 
-    char url[WEBDAV_MAX_ENDPOINT + WEBDAV_MAX_REMOTE_PATH + WEBDAV_MAX_BOOK_ID + 8] = {0};
+    char url[WEBDAV_MAX_ENDPOINT + WEBDAV_MAX_REMOTE_PATH + WEBDAV_MAX_BOOK_ID + WEBDAV_URL_OVERHEAD] = {0};
     int url_len = snprintf(
         url,
         sizeof(url),
@@ -71,7 +73,7 @@ bool webdav_download_progress(webdav_client_t *client, const char *book_id, book
     if (client == NULL || book_id == NULL || out_progress == NULL || client->transport == NULL) {
         return false;
     }
-    char url[WEBDAV_MAX_ENDPOINT + WEBDAV_MAX_REMOTE_PATH + WEBDAV_MAX_BOOK_ID + 8] = {0};
+    char url[WEBDAV_MAX_ENDPOINT + WEBDAV_MAX_REMOTE_PATH + WEBDAV_MAX_BOOK_ID + WEBDAV_URL_OVERHEAD] = {0};
     int url_len = snprintf(
         url,
         sizeof(url),

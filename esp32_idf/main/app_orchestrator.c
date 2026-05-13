@@ -4,12 +4,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#define DEFAULT_BYTES_PER_PAGE 180
+
 bool app_init(app_runtime_t *runtime) {
     if (runtime == NULL || runtime->content_api_base == NULL || runtime->book_id == NULL) {
         return false;
     }
     if (runtime->bytes_per_page == 0) {
-        runtime->bytes_per_page = 180;
+        runtime->bytes_per_page = DEFAULT_BYTES_PER_PAGE;
     }
     reader_init(&runtime->reader);
     runtime->total_pages = 0;
