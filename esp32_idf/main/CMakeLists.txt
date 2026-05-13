@@ -1,0 +1,10 @@
+idf_component_register(
+    SRCS
+        "main.c"
+        "reader_core.c"
+        "content_provider_client.c"
+        "webdav_sync.c"
+        "app_orchestrator.c"
+    INCLUDE_DIRS
+        "include"
+)
