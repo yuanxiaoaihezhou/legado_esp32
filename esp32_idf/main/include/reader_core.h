@@ -6,6 +6,9 @@
 
 #define READER_MAX_PAGE_TEXT 256
 #define READER_MAX_PAGES 64
+/* 当前骨架默认面向 200x200 单色墨水屏目标，可按字体与边距重新标定分页策略。 */
+#define READER_TARGET_WIDTH 200
+#define READER_TARGET_HEIGHT 200
 
 typedef struct {
     int chapter_id;
@@ -39,4 +42,3 @@ bool reader_get_page(
 );
 
 #endif
-

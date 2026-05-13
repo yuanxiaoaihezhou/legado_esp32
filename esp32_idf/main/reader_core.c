@@ -30,26 +30,26 @@ size_t reader_paginate_chapter(
         return 1;
     }
 
-    size_t page_count = 0;
+    int page_index = 0;
     size_t offset = 0;
-    while (offset < text_len && page_count < max_pages) {
+    while (offset < text_len && (size_t)page_index < max_pages) {
         size_t remaining = text_len - offset;
         size_t copy_len = remaining > bytes_per_page ? bytes_per_page : remaining;
 
-        out_pages[page_count].chapter_id = chapter_id;
-        out_pages[page_count].page_index = (int)page_count;
-        out_pages[page_count].is_last_page = (offset + copy_len >= text_len);
-        memcpy(out_pages[page_count].text, chapter_text + offset, copy_len);
-        out_pages[page_count].text[copy_len] = '\0';
+        out_pages[page_index].chapter_id = chapter_id;
+        out_pages[page_index].page_index = page_index;
+        out_pages[page_index].is_last_page = (offset + copy_len >= text_len);
+        memcpy(out_pages[page_index].text, chapter_text + offset, copy_len);
+        out_pages[page_index].text[copy_len] = '\0';
 
         offset += copy_len;
-        page_count++;
+        page_index++;
     }
 
-    if (offset < text_len && page_count > 0) {
-        out_pages[page_count - 1].is_last_page = true;
+    if (offset < text_len && page_index > 0) {
+        out_pages[page_index - 1].is_last_page = true;
     }
-    return page_count;
+    return (size_t)page_index;
 }
 
 bool reader_get_page(
@@ -63,4 +63,3 @@ bool reader_get_page(
     *out_page = pages[page_index];
     return true;
 }
-

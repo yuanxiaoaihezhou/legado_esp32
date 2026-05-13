@@ -46,7 +46,11 @@ bool app_cycle(app_runtime_t *runtime) {
     runtime->reader.current_page = 0;
     runtime->reader.last_offset_bytes = strlen(runtime->pages[0].text);
 
-    /* 这里可替换为真实 e-Paper 渲染输出 */
+    /*
+     * 这里是渲染集成点：
+     * 未来用 e-Paper 驱动函数替换，例如
+     * epd_render_page(const reader_page_t* page, int width, int height)
+     */
     printf("Render chapter=%d page=%d/%d\n%s\n",
            runtime->reader.chapter_id,
            runtime->reader.current_page + 1,
@@ -60,4 +64,3 @@ bool app_cycle(app_runtime_t *runtime) {
     progress.timestamp_ms = 0;
     return webdav_upload_progress(&runtime->webdav, &progress);
 }
-

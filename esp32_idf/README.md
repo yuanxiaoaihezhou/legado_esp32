@@ -8,7 +8,7 @@
 
 ## 目录结构
 
-- `main/include/reader_core.h`：200x200 黑白屏场景下的文本分页核心接口
+- `main/include/reader_core.h`：文本分页核心接口（内置 `READER_TARGET_WIDTH/HEIGHT=200` 目标参数）
 - `main/include/content_provider_client.h`：上游“已解析章节”客户端接口（简化版）
 - `main/include/webdav_sync.h`：WebDAV 进度同步接口与重试策略
 - `main/include/app_orchestrator.h`：设备侧编排入口
@@ -25,4 +25,3 @@
 - 用真实 e-Paper 驱动替换 `app_orchestrator.c` 中的页面输出逻辑。
 - 用 ESP-IDF `esp_http_client` 实现 `webdav_transport_fn`。
 - 用真实 API 替换 `content_provider_fetch_chapter()` 中的示例内容。
-

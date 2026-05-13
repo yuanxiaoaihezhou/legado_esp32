@@ -98,7 +98,11 @@ bool webdav_download_progress(webdav_client_t *client, const char *book_id, book
     );
     if (body_size <= 0 || status_code != 200) return false;
 
-    /* 简化实现：先返回默认结构，后续可替换为 JSON 解析 */
+    /*
+     * 当前桩实现限制：
+     * 仅校验 GET 成功，不解析返回 JSON，始终返回零值进度结构。
+     * TODO: 在此处解析 body 中的 JSON 字段并填充 out_progress。
+     */
     memset(out_progress, 0, sizeof(*out_progress));
     (void)snprintf(out_progress->book_id, sizeof(out_progress->book_id), "%s", book_id);
     out_progress->chapter_id = 0;
