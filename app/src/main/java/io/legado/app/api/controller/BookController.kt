@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit
 object BookController {
 
     private data class Esp32ChapterPayload(
-        val bookId: String,
+        val bookUrl: String,
         val chapterIndex: Int,
         val title: String,
         val content: String
@@ -255,7 +255,7 @@ object BookController {
 
         return returnData.setData(
             Esp32ChapterPayload(
-                bookId = bookUrl,
+                bookUrl = bookUrl,
                 chapterIndex = chapter.index,
                 title = chapter.title,
                 content = content

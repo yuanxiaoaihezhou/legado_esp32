@@ -161,7 +161,7 @@ Method = GET
 
 #### 获取 ESP32 精简章节数据
 
-用于 ESP32 等低算力设备，返回标准化章节对象：`bookId`、`chapterIndex`、`title`、`content`。
+用于 ESP32 等低算力设备，返回标准化章节对象：`bookUrl`、`chapterIndex`、`title`、`content`。
 
 ```
 URL = http://127.0.0.1:1234/getEsp32Chapter?url=xxx&index=1
