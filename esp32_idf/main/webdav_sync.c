@@ -2,6 +2,7 @@
 
 #include <ctype.h>
 #include <errno.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,9 +42,10 @@ static bool parse_json_int(const char *json, const char *key, int *out) {
     const char *start = find_json_value_start(json, key);
     if (start == NULL) return false;
     errno = 0;
-    char *end = NULL;
+    char *end;
     long value = strtol(start, &end, 10);
     if (start == end || errno != 0) return false;
+    if (value < INT_MIN || value > INT_MAX) return false;
     *out = (int)value;
     return true;
 }
@@ -53,9 +55,10 @@ static bool parse_json_u64(const char *json, const char *key, uint64_t *out) {
     const char *start = find_json_value_start(json, key);
     if (start == NULL) return false;
     errno = 0;
-    char *end = NULL;
+    char *end;
     unsigned long long value = strtoull(start, &end, 10);
     if (start == end || errno != 0) return false;
+    if (value > (unsigned long long)UINT64_MAX) return false;
     *out = (uint64_t)value;
     return true;
 }
