@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-/* URL overhead = "/" (endpoint/path) + "/" (path/book) + "/" (book suffix) + ".json"(5) + '\0' */
-#define WEBDAV_URL_OVERHEAD 9
+/* URL overhead for "%s/%s/%s.json": 2 slashes + ".json"(5) + '\0' */
+#define WEBDAV_URL_OVERHEAD 8
 
 static int build_progress_payload(const book_progress_t *progress, uint8_t *payload, size_t payload_size) {
     if (progress == NULL || payload == NULL || payload_size == 0) return -1;
