@@ -20,6 +20,12 @@
 2. **书源能力下沉**：由手机/服务端输出标准化章节内容，ESP32 只消费结果。
 3. **同步优先落地**：WebDAV 作为独立模块，后续可替换为真实 HTTP/TLS 传输层。
 
+## 配套 App 对接建议
+
+- 建议使用 App Web API：`/getEsp32Chapter?url={bookUrl}&index={chapterIndex}`。
+- 返回字段：`bookUrl`、`chapterIndex`、`title`、`content`，可直接映射到设备侧章节拉取模型。
+- 进度同步 JSON 字段与设备侧一致：`bookId`、`chapterId`、`pageIndex`、`timestampMs`。
+
 ## 后续接入
 
 - 用真实 e-Paper 驱动替换 `app_orchestrator.c` 中的页面输出逻辑。

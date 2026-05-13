@@ -81,6 +81,7 @@ class HttpServer(port: Int) : NanoHTTPD(port) {
                         "/getChapterList" -> BookController.getChapterList(parameters)
                         "/refreshToc" -> BookController.refreshToc(parameters)
                         "/getBookContent" -> BookController.getBookContent(parameters)
+                        "/getEsp32Chapter" -> BookController.getEsp32Chapter(parameters)
                         "/cover" -> BookController.getCover(parameters)
                         "/image" -> BookController.getImg(parameters)
                         "/getReadConfig" -> BookController.getWebReadConfig()
