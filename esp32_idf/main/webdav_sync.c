@@ -58,9 +58,6 @@ static bool parse_json_u64(const char *json, const char *key, uint64_t *out) {
     char *end;
     unsigned long long value = strtoull(start, &end, 10);
     if (start == end || errno != 0) return false;
-#if ULLONG_MAX > UINT64_MAX
-    if (value > (unsigned long long)UINT64_MAX) return false;
-#endif
     *out = (uint64_t)value;
     return true;
 }
