@@ -37,7 +37,7 @@ object BookController {
 
     private data class Esp32ChapterPayload(
         val bookId: String,
-        val chapterId: Int,
+        val chapterIndex: Int,
         val title: String,
         val content: String
     )
@@ -254,7 +254,7 @@ object BookController {
         return returnData.setData(
             Esp32ChapterPayload(
                 bookId = bookUrl,
-                chapterId = chapter.index,
+                chapterIndex = chapter.index,
                 title = chapter.title,
                 content = content
             )

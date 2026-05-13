@@ -23,7 +23,7 @@
 ## 配套 App 对接建议
 
 - 建议使用 App Web API：`/getEsp32Chapter?url={bookUrl}&index={chapterIndex}`。
-- 返回字段：`bookId`、`chapterId`、`title`、`content`，可直接映射到设备侧章节拉取模型。
+- 返回字段：`bookId`、`chapterIndex`、`title`、`content`，可直接映射到设备侧章节拉取模型。
 - 进度同步 JSON 字段与设备侧一致：`bookId`、`chapterId`、`pageIndex`、`timestampMs`。
 
 ## 后续接入
