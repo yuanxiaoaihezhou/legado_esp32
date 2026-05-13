@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-/* URL 额外空间：2个分隔符 "/" + ".json"(5) + 结尾 '\0' */
-#define WEBDAV_URL_OVERHEAD 8
+/* URL 额外空间：3个分隔符 "/" + ".json"(5) + 结尾 '\0' */
+#define WEBDAV_URL_OVERHEAD 9
 
 static int build_progress_payload(const book_progress_t *progress, uint8_t *payload, size_t payload_size) {
     if (progress == NULL || payload == NULL || payload_size == 0) return -1;
