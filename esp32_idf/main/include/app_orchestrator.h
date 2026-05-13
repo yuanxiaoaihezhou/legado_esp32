@@ -20,4 +20,3 @@ bool app_init(app_runtime_t *runtime);
 bool app_cycle(app_runtime_t *runtime);
 
 #endif
-

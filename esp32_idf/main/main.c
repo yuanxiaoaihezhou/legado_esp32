@@ -58,4 +58,3 @@ void app_main(void) {
     }
     printf("app_cycle done\n");
 }
-

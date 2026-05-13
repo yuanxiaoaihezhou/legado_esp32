@@ -40,4 +40,3 @@ provider_error_t content_provider_fetch_chapter(
 
     return PROVIDER_OK;
 }
-

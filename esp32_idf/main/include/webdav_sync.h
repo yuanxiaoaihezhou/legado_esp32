@@ -49,4 +49,3 @@ bool webdav_upload_progress(webdav_client_t *client, const book_progress_t *prog
 bool webdav_download_progress(webdav_client_t *client, const char *book_id, book_progress_t *out_progress);
 
 #endif
-

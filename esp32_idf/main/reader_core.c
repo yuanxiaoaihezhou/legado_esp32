@@ -32,7 +32,7 @@ size_t reader_paginate_chapter(
 
     size_t page_index = 0;
     size_t offset = 0;
-    while (offset < text_len && (size_t)page_index < max_pages) {
+    while (offset < text_len && page_index < max_pages) {
         size_t remaining = text_len - offset;
         size_t copy_len = remaining > bytes_per_page ? bytes_per_page : remaining;
 
@@ -46,9 +46,6 @@ size_t reader_paginate_chapter(
         page_index++;
     }
 
-    if (offset < text_len && page_index > 0) {
-        out_pages[page_index - 1].is_last_page = true;
-    }
     return page_index;
 }
 
