@@ -13,7 +13,9 @@ provider_error_t content_provider_fetch_chapter(
         return PROVIDER_ERR_INVALID_ARGUMENT;
     }
 
-    if (strncmp(api_base, "http", 4) != 0) {
+    bool is_https = strncmp(api_base, "https://", 8) == 0;
+    bool is_http = strncmp(api_base, "http://", 7) == 0;
+    if (!is_https && !is_http) {
         return PROVIDER_ERR_UNSUPPORTED_SOURCE;
     }
 

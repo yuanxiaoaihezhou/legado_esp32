@@ -49,8 +49,8 @@ bool app_cycle(app_runtime_t *runtime) {
     runtime->reader.last_offset_bytes = strlen(runtime->pages[0].text);
 
     /*
-     * 这里是渲染集成点：
-     * 未来用 e-Paper 驱动函数替换，例如
+     * Rendering integration point:
+     * replace this block with an e-Paper driver call, for example:
      * epd_render_page(const reader_page_t* page, int width, int height)
      */
     printf("Render chapter=%d page=%d/%d\n%s\n",

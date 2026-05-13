@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-/* URL 额外空间：3个分隔符 "/" + ".json"(5) + 结尾 '\0' */
+/* URL overhead = "/" (endpoint/path) + "/" (path/book) + "/" (book suffix) + ".json"(5) + '\0' */
 #define WEBDAV_URL_OVERHEAD 9
 
 static int build_progress_payload(const book_progress_t *progress, uint8_t *payload, size_t payload_size) {
@@ -102,14 +102,12 @@ bool webdav_download_progress(webdav_client_t *client, const char *book_id, book
     if (body_size <= 0 || status_code != 200) return false;
 
     /*
-     * 当前桩实现限制：
-     * 仅校验 GET 成功，不解析返回 JSON，始终返回零值进度结构。
-     * TODO: 在此处解析 body 中的 JSON 字段并填充 out_progress。
+     * Current stub limitation:
+     * Response JSON is not parsed yet. Returning false avoids reporting
+     * a successful sync with invalid zero-filled progress data.
+     * TODO: parse body JSON and populate out_progress.
      */
     memset(out_progress, 0, sizeof(*out_progress));
     (void)snprintf(out_progress->book_id, sizeof(out_progress->book_id), "%s", book_id);
-    out_progress->chapter_id = 0;
-    out_progress->page_index = 0;
-    out_progress->timestamp_ms = 0;
-    return true;
+    return false;
 }
