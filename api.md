@@ -159,6 +159,15 @@ Method = GET
 
 获取指定图书的第`index`章节的文本内容。
 
+#### 获取 ESP32 精简章节数据
+
+用于 ESP32 等低算力设备，返回标准化章节对象：`bookId`、`chapterId`、`title`、`content`。
+
+```
+URL = http://127.0.0.1:1234/getEsp32Chapter?url=xxx&index=1
+Method = GET
+```
+
 #### 获取封面
 
 ```

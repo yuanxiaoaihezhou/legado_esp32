@@ -35,6 +35,13 @@ import java.util.concurrent.TimeUnit
 
 object BookController {
 
+    private data class Esp32ChapterPayload(
+        val bookId: String,
+        val chapterId: Int,
+        val title: String,
+        val content: String
+    )
+
     private lateinit var book: Book
     private var bookSource: BookSource? = null
     private var bookUrl: String = ""
@@ -220,6 +227,35 @@ object BookController {
             returnData.setErrorMsg(e.stackTraceStr)
         }
         return returnData
+    }
+
+    /**
+     * 获取 ESP32 设备使用的精简章节数据
+     */
+    fun getEsp32Chapter(parameters: Map<String, List<String>>): ReturnData {
+        val returnData = ReturnData()
+        val bookUrl = parameters["url"]?.firstOrNull()
+            ?: return returnData.setErrorMsg("参数url不能为空，请指定书籍地址")
+        val index = parameters["index"]?.firstOrNull()?.toIntOrNull()
+            ?: return returnData.setErrorMsg("参数index不能为空, 请指定目录序号")
+
+        val contentResult = getBookContent(parameters)
+        if (!contentResult.isSuccess) {
+            return contentResult
+        }
+        val content = contentResult.data as? String
+            ?: return returnData.setErrorMsg("正文格式错误")
+        val chapter = appDb.bookChapterDao.getChapter(bookUrl, index)
+            ?: return returnData.setErrorMsg("未找到章节")
+
+        return returnData.setData(
+            Esp32ChapterPayload(
+                bookId = bookUrl,
+                chapterId = chapter.index,
+                title = chapter.title,
+                content = content
+            )
+        )
     }
 
     /**

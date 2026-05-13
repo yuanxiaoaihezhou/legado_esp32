@@ -35,7 +35,8 @@ provider_error_t content_provider_fetch_chapter(
         sizeof(out_response->content),
         "This is simplified chapter content from upstream parser service. "
         "book=%s chapter=%d. "
-        "In production, ESP32 should pull normalized chapter payload instead of running full source rules.",
+        "In production, ESP32 should call app endpoint /getEsp32Chapter and pull normalized payload "
+        "instead of running full source rules.",
         book_id,
         chapter_id
     );
