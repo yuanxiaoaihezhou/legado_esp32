@@ -249,7 +249,7 @@ object BookController {
             return contentResult
         }
         val content = contentResult.data as? String
-            ?: return returnData.setErrorMsg("正文格式错误")
+            ?: return returnData.setErrorMsg("正文数据类型错误")
         val chapter = appDb.bookChapterDao.getChapter(bookUrl, index)
             ?: return returnData.setErrorMsg("未找到章节")
 
