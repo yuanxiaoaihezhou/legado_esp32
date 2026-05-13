@@ -58,7 +58,9 @@ static bool parse_json_u64(const char *json, const char *key, uint64_t *out) {
     char *end;
     unsigned long long value = strtoull(start, &end, 10);
     if (start == end || errno != 0) return false;
+#if ULLONG_MAX > UINT64_MAX
     if (value > (unsigned long long)UINT64_MAX) return false;
+#endif
     *out = (uint64_t)value;
     return true;
 }
@@ -157,11 +159,8 @@ bool webdav_download_progress(webdav_client_t *client, const char *book_id, book
         &status_code
     );
     if (body_size <= 0 || status_code != 200) return false;
-    if ((size_t)body_size >= sizeof(body)) {
-        body[sizeof(body) - 1] = '\0';
-    } else {
-        body[body_size] = '\0';
-    }
+    if ((size_t)body_size >= sizeof(body)) return false;
+    body[body_size] = '\0';
 
     const char *json = (const char *)body;
     memset(out_progress, 0, sizeof(*out_progress));

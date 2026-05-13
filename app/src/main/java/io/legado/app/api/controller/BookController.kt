@@ -238,6 +238,9 @@ object BookController {
             ?: return returnData.setErrorMsg("参数url不能为空，请指定书籍地址")
         val index = parameters["index"]?.firstOrNull()?.toIntOrNull()
             ?: return returnData.setErrorMsg("参数index不能为空, 请指定目录序号")
+        if (index < 0) {
+            return returnData.setErrorMsg("参数index不能小于0")
+        }
 
         val contentResult = getBookContent(parameters)
         if (!contentResult.isSuccess) {
